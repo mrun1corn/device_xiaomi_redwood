@@ -51,8 +51,7 @@ blob_fixups: blob_fixups_user_type = {
     ('vendor/etc/media_lahaina/video_system_specs.json', 'vendor/etc/media_yupik_v1/video_system_specs.json'): blob_fixup()
         .regex_replace('"max_retry_alloc_output_timeout": 10000,', '"max_retry_alloc_output_timeout": 0,'),
     'vendor/etc/vintf/manifest/c2_manifest_vendor.xml': blob_fixup()
-        .regex_replace('.*ozoaudio.*\n?', '')
-        .regex_replace('.*dolby.*\n?', ''),
+        .regex_replace('.*ozoaudio.*\n?', ''),
     ('vendor/etc/init/android.hardware.drm@1.3-service.widevine.rc', 'vendor/etc/init/vendor.qti.media.c2@1.0-service.rc'): blob_fixup()
         .regex_replace('writepid /dev/cpuset/foreground/tasks', 'task_profiles ProcessCapacityHigh'),
     ('vendor/etc/init/android.hardware.neuralnetworks@1.3-service-qti.rc'): blob_fixup()
@@ -94,6 +93,12 @@ blob_fixups: blob_fixups_user_type = {
         .replace_needed('vendor.xiaomi.hardware.displayfeature@1.0.so', 'vendor.xiaomi.hardware.displayfeature@1.0_vendor.so'),
     ('vendor/etc/media_codecs.xml', 'vendor/etc/media_codecs_yupik_v0.xml', 'vendor/etc/media_codecs_yupik_v1.xml'): blob_fixup()
         .regex_replace('.+media_codecs_(google_audio|google_c2|google_telephony|vendor_audio).+\n', ''),
+        ('vendor/lib/c2.dolby.avc.dec.so', 'vendor/lib/c2.dolby.avc.sec.dec.so', 'vendor/lib/c2.dolby.hevc.dec.so', 'vendor/lib/c2.dolby.hevc.sec.dec.so'): blob_fixup()
+        .add_needed('libstagefright_foundation-v33.so'),
+        ('vendor/bin/hw/dolbycodec2'): blob_fixup()
+        .add_needed('libstagefright_foundation-v33.so'),
+        ('vendor/lib/c2.dolby.client.so'): blob_fixup()
+        .add_needed('libcodec2_hidl_shim.so'),
 }  # fmt: skip
 
 module = ExtractUtilsModule(
