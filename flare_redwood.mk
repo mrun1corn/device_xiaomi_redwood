@@ -8,17 +8,17 @@
 $(call inherit-product, device/xiaomi/redwood/device.mk)
 
 # Inherit some common Lineage stuff.
-$(call inherit-product, vendor/aosp/config/common_full_phone.mk)
+$(call inherit-product, vendor/flare/config/common_full_phone.mk)
 
 # Pribuilt kernel true/false
 PREBUILT_KERNEL := true
 
 # Gapps
-WITH_GMS := true
+WITH_GAPPS := true
 
-# TPP OFFICIAL
-CUSTOM_BUILD_TYPE := OFFICIAL
-CUSTOM_MAINTAINER := Thereache
+# Flare Flags
+FLARE_BUILD_TYPE := UNOFFICIAL
+FLARE_MAINTAINER := mrun1corn
 
 # Device props
 TARGET_SUPPORTS_BLUR := true
